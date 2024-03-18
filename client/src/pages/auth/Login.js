@@ -3,11 +3,13 @@ import { Link,useNavigate } from "react-router-dom";
 import { useState} from "react";
 import axios from 'axios'
 import toast from "react-hot-toast";
+import { useAuth } from "../../components/context/auth";
 
 const Login = () => {
   const navigate=useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [auth,setAuth]=useAuth();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -16,6 +18,12 @@ const Login = () => {
       });
       if(res.data.success===true){
         toast.success(res.data.message);
+        setAuth({
+          ...auth,
+          user:res.data.user,
+          token:res.data.token
+        });
+        localStorage.setItem('auth',JSON.stringify(res.data));
         navigate('/');
       }
       else{
