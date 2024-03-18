@@ -1,11 +1,11 @@
 import React from 'react'
 
-const HomePage = () => {
+const Policy = () => {
   return (
     <div>
-      Hello
+      Policy
     </div>
   )
 }
 
-export default HomePage
+export default Policy

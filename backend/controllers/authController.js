@@ -11,13 +11,13 @@ const registerController= async(req,res)=>{
         const {name,email,password,phone,address}=req.body;
         // validations
         if(!name||!email||!password||!phone||!address){
-            return res.send({error:"Please enter all credentials"});
+            return res.send({message:"Please enter all credentials",success:false});
         }
         // checking existing user
         const user=await userModel.findOne({email});
         if(user){
             return res.status(200).send({
-                success:true,
+                success:false,
                 message:"User already registered"
             })
         }
