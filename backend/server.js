@@ -20,8 +20,7 @@ app.use('/api/v1/auth',authRoute);
 
 app.get('/',(req,res)=>{
     res.send({
-        message:"hello ",
-        route:"/"
+        message:"Welcome to Ecom",
     })
 })
 app.listen(PORT,()=>{
