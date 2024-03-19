@@ -9,6 +9,10 @@ const router=express.Router();
 router.post('/register',registerController);
 router.post('/login',loginController)
 router.get('/test',requireSignIn,isAdmin,protectedroute);
+// user protected routes
+router.get('/user-auth',requireSignIn,(req,res)=>{
+    res.status(200).send({ok:true});
+})
 
 // exporting router
 export default router;

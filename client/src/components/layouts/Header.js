@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../components/context/auth'
+import { useAuth } from '../context/auth'
 import {toast} from 'react-hot-toast'
 
 const Header = () => {
