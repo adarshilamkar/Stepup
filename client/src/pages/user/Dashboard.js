@@ -1,11 +1,12 @@
 import React from 'react'
-import Layout from '../../components/layouts/Layout'
+import { useAuth } from '../../components/context/auth'
 
 const Dashboard = () => {
+  const [auth,setAuth]=useAuth();
   return (
-    <Layout>
-              
-    </Layout>
+    <div>
+      Hello {`${auth.user?.name}`}
+    </div>
   )
 }
 

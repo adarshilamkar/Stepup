@@ -10,6 +10,13 @@ import Policy from './pages/Policy'
 import PageNotFound from './pages/PageNotFound'
 import Dashboard from './pages/user/Dashboard'
 import Private from './components/routes/Private'
+import AdminRoute from './components/routes/AdminRoute'
+import AdminDashboard from './pages/admin/AdminDashboard'
+import CreateProduct from './pages/admin/CreateProduct'
+import CreateCategory from './pages/admin/CreateCategory'
+import Users from './pages/admin/Users'
+import Profile from './pages/user/Profile'
+import Orders from './pages/user/Orders'
 const App = () => {
   return (
     <Layout>
@@ -21,7 +28,15 @@ const App = () => {
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/dashboard' element={<Private></Private>}>
-        <Route path='' element={<Dashboard></Dashboard>}></Route>
+        <Route path='user' element={<Dashboard></Dashboard>}></Route>
+        <Route path='user/profile' element={<Profile></Profile>}></Route>
+        <Route path='user/orders' element={<Orders></Orders>}></Route>
+        </Route>
+        <Route path='/dashboard' element={<AdminRoute></AdminRoute>}>
+        <Route path='admin' element={<AdminDashboard></AdminDashboard>}></Route>
+        <Route path='admin/create-product' element={<CreateProduct></CreateProduct>}></Route>
+        <Route path='admin/create-category' element={<CreateCategory></CreateCategory>}></Route>
+        <Route path='admin/users' element={<Users></Users>}></Route>
         </Route>
         <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
       </Routes>
