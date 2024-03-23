@@ -3,7 +3,7 @@ import categoryModels from "../../models/categoryModels.js";
 const deleteCategoryController=async(req,res)=>{
     try {
         const {id}=req.params;
-        const category=categoryModels.findByIdAndDelete(id);
+        const category=await categoryModels.findByIdAndDelete(id);
         if(!category){
             res.status(500).send({
                 message:"cannot delete category",
