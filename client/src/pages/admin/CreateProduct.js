@@ -1,13 +1,14 @@
-import React from 'react'
-import AdminMenu from '../../components/layouts/AdminMenu'
+import React from "react";
+import AdminMenu from "../../components/layouts/AdminMenu";
+import CreateProductForm from "./CreateProductForm";
 
 const CreateProduct = () => {
   return (
     <div>
       <AdminMenu></AdminMenu>
-      CreateProduct
+      <CreateProductForm></CreateProductForm>
     </div>
-  )
-}
+  );
+};
 
-export default CreateProduct
+export default CreateProduct;
