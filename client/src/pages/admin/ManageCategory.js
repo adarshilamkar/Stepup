@@ -5,14 +5,26 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import CategoryForm from "../../components/form/CategoryForm";
 import { useAuth } from "../../components/context/auth";
+import Modal from "../../components/layouts/Modal";
 
 const CreateCategory = () => {
   const [auth] = useAuth();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
-  const handleDelete = async (id) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selected, setSelected] = useState("");
+  const [updated, setUpdated] = useState("");
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleDelete = async (c) => {
     const result = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/category/delete-category/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/category/delete-category/${c._id}`,
       {
         headers: {
           Authorization: `${auth.token}`,
@@ -20,7 +32,29 @@ const CreateCategory = () => {
       }
     );
     if (result.data.success) {
-      toast.success(`${id} deleted Successfully`);
+      toast.success(`${c.name} deleted Successfully`);
+      getAllCategories();
+    }
+  };
+  const handleEdit = (c) => {
+    openModal();
+    setSelected(c._id);
+    setUpdated(c.name);
+  };
+  const handleEditChange = async (e) => {
+    e.preventDefault();
+    const result = await axios.put(
+      `${process.env.REACT_APP_API}/api/v1/category/update-category/${selected}`,
+      { newname: updated },
+      {
+        headers: {
+          Authorization: `${auth.token}`,
+        },
+      }
+    );
+    if (result.data.success) {
+      toast.success(`${updated} updated Successfully`);
+      closeModal();
       getAllCategories();
     }
   };
@@ -76,16 +110,29 @@ const CreateCategory = () => {
         <tbody>
           {categories.map((c) => (
             <tr className="" key={c._id}>
+              <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <CategoryForm
+                  handleSubmit={handleEditChange}
+                  value={updated}
+                  setValue={setUpdated}
+                ></CategoryForm>
+              </Modal>
               <td>{c.name}</td>
               <td className="flex justify-end">
-                <button className="bg-blue-700 text-white rounded-md p-2 m-2">
+                <button
+                  className="bg-blue-700 text-white rounded-md p-2 m-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleEdit(c);
+                  }}
+                >
                   Edit
                 </button>
                 <button
                   className="bg-blue-700 text-white rounded-md p-2 m-2"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleDelete(c._id);
+                    handleDelete(c);
                   }}
                 >
                   Delete
