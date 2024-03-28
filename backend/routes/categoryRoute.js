@@ -27,8 +27,6 @@ router.get("/all-categories", getAllCategoryController);
 // single category
 router.get(
   "/single-category/:id",
-  requireSignIn,
-  isAdmin,
   singleCategoryController
 );
 // delete category

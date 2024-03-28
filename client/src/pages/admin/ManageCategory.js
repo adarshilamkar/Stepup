@@ -51,7 +51,7 @@ const CreateCategory = () => {
           Authorization: `${auth.token}`,
         },
       }
-    );
+    );  
     if (result.data.success) {
       toast.success(`${updated} updated Successfully`);
       closeModal();
@@ -79,7 +79,7 @@ const CreateCategory = () => {
   const getAllCategories = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8000/api/v1/category/all-categories`
+        `${process.env.REACT_APP_API}/api/v1/category/all-categories`
       );
       setCategories(data.categories);
     } catch (error) {

@@ -12,7 +12,7 @@ import Dashboard from "./pages/user/Dashboard";
 import Private from "./components/routes/Private";
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import CreateProduct from "./pages/admin/CreateProduct";
+import Products from "./pages/admin/Products";
 import ManageCategory from "./pages/admin/ManageCategory";
 import Users from "./pages/admin/Users";
 import Profile from "./pages/user/Profile";
@@ -33,13 +33,10 @@ const App = () => {
           <Route path="user/orders" element={<Orders></Orders>}></Route>
         </Route>
         <Route path="/dashboard" element={<AdminRoute></AdminRoute>}>
+          <Route path="admin/products" element={<Products></Products>}></Route>
           <Route
             path="admin"
             element={<AdminDashboard></AdminDashboard>}
-          ></Route>
-          <Route
-            path="admin/create-product"
-            element={<CreateProduct></CreateProduct>}
           ></Route>
           <Route
             path="admin/create-category"
