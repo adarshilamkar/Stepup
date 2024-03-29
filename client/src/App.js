@@ -17,11 +17,16 @@ import ManageCategory from "./pages/admin/ManageCategory";
 import Users from "./pages/admin/Users";
 import Profile from "./pages/user/Profile";
 import Orders from "./pages/user/Orders";
+import ProductDetails from "./pages/user/ProductDetails";
 const App = () => {
   return (
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage></HomePage>}></Route>
+        <Route
+          path="/product/:id"
+          element={<ProductDetails></ProductDetails>}
+        ></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/contact" element={<Contact></Contact>}></Route>
         <Route path="/policy" element={<Policy></Policy>}></Route>
