@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "../components/Card";
 import { Checkbox } from "antd";
+import { useCart } from "../components/context/cart";
 
 const HomePage = () => {
+  const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -12,7 +14,7 @@ const HomePage = () => {
   const getAllProducts = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/api/v1/product/get-products`
-    );
+    ); 
     if (response.data.count) {
       setProducts(response.data.products);
     }
@@ -56,6 +58,7 @@ const HomePage = () => {
 
   return (
     <div className="flex flex-wrap justify-center">
+      {JSON.stringify(cart)}
       <div className="w-2/12 inline-block border border-red-700 overflow-x-hidden">
         <h2>Filters</h2>
         <h3>Min Price</h3>
