@@ -1,41 +1,51 @@
 import React from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useCart } from "../../components/context/cart";
+import { useCart } from "../components/context/cart";
 import { toast } from "react-hot-toast";
 
-const ProductDetails = () => {
+const Featured = () => {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+  const [feat, setFeat] = useState(null);
   const [cart, setCart] = useCart();
-  const params = useParams();
-  const [product, setProduct] = useState({});
-  const getProductDetails = async () => {
-    const res = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/product/get-product/${params.id}`
-    );
-    setProduct(res.data.product);
+
+  const getProduct = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/get-products`
+      );
+      if (response.data.count > 0) {
+        setProducts(response.data.products);
+        const randomIndex = Math.floor(Math.random() * response.data.count);
+        setFeat(response.data.products[randomIndex]);
+      }
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    }
   };
+
   const handleAddToCart = () => {
-    const existingItem = cart.find((item) => item._id === product._id);
+    if (!feat) return; // Return early if feat is undefined
+
+    const existingItem = cart.find((item) => item._id === feat._id);
 
     if (existingItem) {
-      // If the product already exists, create a copy of the cart and increase the quantity of the existing item
       const updatedCart = cart.map((item) =>
-        item.product_id === product.product_id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+        item._id === feat._id ? { ...item, quantity: item.quantity + 1 } : item
       );
       setCart(updatedCart);
     } else {
-      // If the product doesn't exist, add it to the cart with quantity 1
-      setCart([...cart, { ...product, quantity: 1 }]);
+      setCart([...cart, { ...feat, quantity: 1 }]);
     }
+
     localStorage.setItem("cart", JSON.stringify(cart));
     toast.success("Item added to Cart");
-    console.log(cart);
+    navigate("/cart");
   };
   useEffect(() => {
-    getProductDetails();
+    getProduct();
   }, []);
   return (
     <div>
@@ -46,23 +56,19 @@ const ProductDetails = () => {
             <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
               <span className="w-20 h-2 bg-gray-800 dark:bg-white mb-12" />
               <h1 className="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none dark:text-white text-gray-800">
-                {product.name ? <>{product.name}</> : <>Product</>}
+                {feat?.name ? <>{feat.name}</> : <>Product</>}
                 <span className="text-3xl sm:text-5xl">
-                  {product.category ? (
-                    <>{product.category.name}</>
-                  ) : (
-                    <>Category</>
-                  )}
+                  {feat?.category ? <>{feat.category.name}</> : <>Category</>}
                 </span>
               </h1>
               <p className="font-bebas-neue text-sm sm:text-base text-gray-700 dark:text-white mt-3">
-                {product.description}
+                {feat?.description}
               </p>
               <p className="font-bebas-neue text-sm sm:text-base text-gray-700 dark:text-white mt-3">
-                <span className="font-bold">MRP:{product.price}$</span>
+                <span className="font-bold">MRP:{feat?.price}$</span>
               </p>
               <p className="font-bebas-neue text-sm sm:text-base text-gray-700 dark:text-white mt-3">
-                <span className="font-bold">Discount:{product.discount}%</span>
+                <span className="font-bold">Discount:{feat?.discount}%</span>
               </p>
               {/* <p className="font-bebas-neue uppercase text-xl text-gray-800 mt-2">{`Price: INR ${product.price}`}</p> */}
               <div className="flex mt-8">
@@ -70,10 +76,10 @@ const ProductDetails = () => {
                   to="#"
                   className="uppercase py-2 px-4 rounded-lg bg-blue-700 border-2 border-transparent text-white text-md mr-4 hover:bg-blue-700"
                 >{`Price: $${
-                  (product.price * (100 - product.discount)) / 100
+                  (feat?.price * (100 - feat?.discount)) / 100
                 }`}</Link>
                 <Link
-                  to="/user/cart"
+                  to="/cart"
                   onClick={handleAddToCart}
                   className="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-blue-700 text-blue-700 dark:text-white hover:bg-blue-700 hover:text-white text-md"
                 >
@@ -83,7 +89,7 @@ const ProductDetails = () => {
             </div>
             <div className="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
               <img
-                src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${feat?._id}`}
                 className="max-w-xs md:max-w-sm m-auto"
                 alt="productImg"
               />
@@ -95,4 +101,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default Featured;

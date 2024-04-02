@@ -8,18 +8,18 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Policy from "./pages/Policy";
 import PageNotFound from "./pages/PageNotFound";
-import Dashboard from "./pages/user/Dashboard";
 import Private from "./components/routes/Private";
 import AdminRoute from "./components/routes/AdminRoute";
-import AdminDashboard from "./pages/admin/AdminDashboard";
 import Products from "./pages/admin/Products";
-import ManageCategory from "./pages/admin/ManageCategory";
-import Users from "./pages/admin/Users";
-import Profile from "./pages/user/Profile";
-import Orders from "./pages/user/Orders";
+import Profile from "./pages/Profile";
 import ProductDetails from "./pages/user/ProductDetails";
 import CartPage from "./pages/CartPage";
 import MyOrders from "./pages/user/MyOrders";
+import Featured from "./pages/Featured";
+import Deals from "./pages/Deals";
+import Users from "./pages/admin/Users";
+import ManageCategory from "./pages/admin/ManageCategory";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 const App = () => {
   return (
     <Layout>
@@ -29,29 +29,30 @@ const App = () => {
           path="/product/:id"
           element={<ProductDetails></ProductDetails>}
         ></Route>
-        <Route path="/myorders" element={<MyOrders></MyOrders>}></Route>
-        <Route path="/cart" element={<CartPage></CartPage>}></Route>
+        <Route path="/featured" element={<Featured></Featured>}></Route>
+        <Route path="/deals" element={<Deals></Deals>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/contact" element={<Contact></Contact>}></Route>
         <Route path="/policy" element={<Policy></Policy>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
-        <Route path="/dashboard" element={<Private></Private>}>
-          <Route path="user" element={<Dashboard></Dashboard>}></Route>
-          <Route path="user/profile" element={<Profile></Profile>}></Route>
-          <Route path="user/orders" element={<Orders></Orders>}></Route>
+        <Route path="/user" element={<Private></Private>}>
+          <Route path="profile" element={<Profile></Profile>}></Route>
+          <Route path="orders" element={<MyOrders></MyOrders>}></Route>
+          <Route path="cart" element={<CartPage></CartPage>}></Route>
         </Route>
-        <Route path="/dashboard" element={<AdminRoute></AdminRoute>}>
-          <Route path="admin/products" element={<Products></Products>}></Route>
+        <Route path="/admin" element={<AdminRoute></AdminRoute>}>
+          <Route path="products" element={<Products></Products>}></Route>
+          <Route path="users" element={<Users></Users>}></Route>
           <Route
-            path="admin"
-            element={<AdminDashboard></AdminDashboard>}
-          ></Route>
-          <Route
-            path="admin/create-category"
+            path="categories"
             element={<ManageCategory></ManageCategory>}
           ></Route>
-          <Route path="admin/users" element={<Users></Users>}></Route>
+          <Route path="products" element={<Products></Products>}></Route>
+          <Route
+            path="dashboard"
+            element={<AdminDashboard></AdminDashboard>}
+          ></Route>
         </Route>
         <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
       </Routes>

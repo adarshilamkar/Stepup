@@ -103,6 +103,7 @@ const HomePage = () => {
             product.price <= maxprice && (
               <Card
                 product={product}
+                discount={product.discount}
                 imageUrl={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                 Name={product.name}
                 Description={`${product.description.substring(0, 35)}...`}

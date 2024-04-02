@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "./context/cart";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-const Card = ({ imageUrl, Name, Description, readLink, product }) => {
-  const navigate = useNavigate();
+const Card = ({ imageUrl, Name, discount, Description, readLink, product }) => {
   const [cart, setCart] = useCart();
   const addToCart = () => {
     const existingItem = cart.find((item) => item._id === product._id);
@@ -44,27 +43,16 @@ const Card = ({ imageUrl, Name, Description, readLink, product }) => {
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {Description}
           </p>
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            <span>MRP:{product.price}$</span>
+            <span className="ml-2">Discount:{discount}%</span>
+          </p>
           <div className="flex justify-evenly">
             <Link
               to={`/product/${readLink}`}
               className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Read more
-              <svg
-                className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 14 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M1 5h12m0 0L9 1m4 4L9 9"
-                />
-              </svg>
             </Link>
             <button
               className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -74,21 +62,6 @@ const Card = ({ imageUrl, Name, Description, readLink, product }) => {
               }}
             >
               Add to Cart
-              <svg
-                className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 14 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M1 5h12m0 0L9 1m4 4L9 9"
-                />
-              </svg>
             </button>
           </div>
         </div>
