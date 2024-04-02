@@ -6,9 +6,9 @@ import categoryRoute from "./routes/categoryRoute.js";
 import productRoute from "./routes/productRoute.js";
 import orderModel from "./models/orderModel.js";
 import cors from "cors";
-import orderRoute from './routes/orderRoute.js'
+import orderRoute from "./routes/orderRoute.js";
 import { requireSignIn } from "./middlewares/authMiddleware.js";
-import userRoute from './routes/userRoute.js'
+import userRoute from "./routes/userRoute.js";
 
 dotenv.config({ path: "../.env" });
 
@@ -23,12 +23,12 @@ app.use(express.json());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/product", productRoute);
-app.use("/api/v1/order",orderRoute);
-app.use("/api/v1/user",userRoute);
+app.use("/api/v1/order", orderRoute);
+app.use("/api/v1/user", userRoute);
 
 app.get("/", (req, res) => {
   res.send({
-    message: "Welcome to Ecom.",
+    message: "Welcome to Ecom Web",
   });
 });
 app.listen(PORT, () => {
