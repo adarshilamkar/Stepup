@@ -33,7 +33,7 @@ const Products = () => {
       <AdminMenu></AdminMenu>
       <CreateProductForm></CreateProductForm>
       <div className="mx-5 mt-2">
-        <div className="font-bold text-center my-5 text-gray-800">
+        <div className="font-bold text-center my-5 text-gray-800 dark:text-white">
           All Products
         </div>
         <div>
@@ -81,7 +81,7 @@ const Products = () => {
                       <td className="px-6 py-4">{product?.category?.name}</td>
                       <td className="px-6 py-4">${product.price}</td>
                       <td className="px-6 py-4">{product.discount}%</td>
-                      <td className="px-6 py-4 border border-blue-200 bg-blue-200">
+                      <td className="px-6 py-4 border border-blue-200 bg-blue-200 dark:bg-gray-900 dark:border-gray-600">
                         {product.quantity}
                       </td>
                       <td className="px-6 py-4">

@@ -34,7 +34,7 @@ const AllOrders = () => {
     <div>
       <AdminMenu></AdminMenu>
       <div className="mx-5 mt-2">
-        <div className="font-bold text-center my-5 text-gray-800">
+        <div className="font-bold text-center my-5 text-gray-800 dark:text-white">
           All Orders
         </div>
         <div>
@@ -78,7 +78,7 @@ const AllOrders = () => {
                       <td className="px-6 py-4">{order?.user}</td>
                       <td className="px-6 py-4">{order.amount}</td>
                       <td className="px-6 py-4">{order.address}</td>
-                      <td className="px-6 py-4 border border-blue-200 bg-blue-200">
+                      <td className="px-6 py-4 border border-blue-200  dark:border-gray-600">
                         {order.status}
                       </td>
                       <td className="px-6 py-4">

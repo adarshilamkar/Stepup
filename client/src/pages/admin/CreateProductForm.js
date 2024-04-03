@@ -73,15 +73,15 @@ const CreateProductForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mb-10">
-      <h2 className="text-xl font-bold my-4 text-center text-gray-800">
+    <div className="max-w-md mx-auto mb-10 ">
+      <h2 className="text-xl font-bold my-4 text-center text-gray-800 dark:text-white">
         Product Form
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-white"
           >
             Name:
           </label>
@@ -91,13 +91,13 @@ const CreateProductForm = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full dark:bg-blue-100"
           />
         </div>
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-white"
           >
             Description:
           </label>
@@ -106,13 +106,13 @@ const CreateProductForm = () => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full dark:bg-blue-100"
           ></textarea>
         </div>
         <div className="mb-4">
           <label
             htmlFor="price"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-white"
           >
             Price:
           </label>
@@ -122,13 +122,13 @@ const CreateProductForm = () => {
             name="price"
             value={formData.price}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full dark:bg-blue-100"
           />
         </div>
         <div className="mb-4">
           <label
             htmlFor="discount"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-white"
           >
             Discount:
           </label>
@@ -138,13 +138,13 @@ const CreateProductForm = () => {
             name="discount"
             value={formData.discount}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full dark:bg-blue-100"
           />
         </div>
         <div className="mb-4">
           <label
             htmlFor="category"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-white"
           >
             Category:
           </label>
@@ -154,13 +154,13 @@ const CreateProductForm = () => {
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full dark:bg-blue-100"
           />
         </div>
         <div className="mb-4">
           <label
             htmlFor="quantity"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-white"
           >
             Quantity:
           </label>
@@ -170,13 +170,13 @@ const CreateProductForm = () => {
             name="quantity"
             value={formData.quantity}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full dark:bg-blue-100"
           />
         </div>
         <div className="mb-4">
           <label
             htmlFor="shipping"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-white"
           >
             Shipping:
           </label>
@@ -185,7 +185,7 @@ const CreateProductForm = () => {
             name="shipping"
             value={formData.shipping}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full dark:bg-blue-100"
           >
             <option value="free">Free</option>
             <option value="paid">Paid</option>
@@ -194,7 +194,7 @@ const CreateProductForm = () => {
         <div className="mb-4">
           <label
             htmlFor="photo"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-white"
           >
             Photo:
           </label>
@@ -204,7 +204,7 @@ const CreateProductForm = () => {
             name="photo"
             accept="image/*"
             onChange={handlePhotoChange}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full text-gray-800 dark:text-white"
           />
         </div>
         <button

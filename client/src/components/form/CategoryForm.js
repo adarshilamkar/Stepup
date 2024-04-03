@@ -5,7 +5,7 @@ const CategoryForm = ({ handleSubmit, value, setValue }) => {
     <div className="mx-5 mt-3">
       <form onSubmit={handleSubmit} className="flex justify-center">
         <input
-          className="border border-blue-700 rounded-sm text-black p-2"
+          className="border border-gray-800 rounded-md text-gray-800 dark:bg-blue-100 p-2"
           type="text"
           name="name"
           value={value}

@@ -34,7 +34,7 @@ const AllUsers = () => {
     <div>
       <AdminMenu></AdminMenu>
       <div className="mx-5 mt-2">
-        <div className="font-bold text-center my-5 text-gray-800">
+        <div className="font-bold text-center my-5 text-gray-800 dark:text-white">
           All Users
         </div>
         <div>

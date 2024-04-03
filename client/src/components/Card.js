@@ -29,7 +29,7 @@ const Card = ({ imageUrl, Name, discount, Description, readLink, product }) => {
       <div className="text-center max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <Link className="flex justify-center rounded-3xl" to="#">
           <img
-            className="rounded-t-lg w-full mx-2  mt-2 p-1 rounded-xl  h-60  "
+            className="rounded-t-lg w-full mx-2  mt-2 p-1 rounded-xl h-60  "
             src={imageUrl}
             alt="product"
           />
