@@ -28,9 +28,9 @@ const Profile = () => {
 
   return (
     <div className="mx-14 mt-8">
-      <div className="bg-white overflow-hidden shadow rounded-lg border">
+      <div className="bg-white overflow-hidden shadow rounded-lg border dark:border-gray-800 dark:bg-gray-800 ">
         <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 flex justify-between">
+          <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white flex justify-between">
             <span>User Profile</span>
             <span className="Save">
               <button
@@ -42,18 +42,20 @@ const Profile = () => {
             </span>
           </h3>
         </div>
-        <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
-          <div className="sm:divide-y sm:divide-gray-200">
+        <div className="border-t border-gray-200 dark:border-gray-800 px-4 py-5 sm:p-0">
+          <div className="sm:divide-y sm:divide-gray-200 dark:sm:divide-gray-700">
             <div className="flex justify-between py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <div className="text-sm font-medium text-gray-500">Full name</div>
+              <div className="text-sm font-medium text-gray-500 dark:text-white">
+                Full name
+              </div>
               <input
                 onChange={(e) => setName(e.target.value)}
                 value={name}
-                className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2  p-2"
+                className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2  p-2 dark:bg-blue-100 rounded-md"
               />
             </div>
             <div className="flex justify-between py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <div className="text-sm font-medium text-gray-500">
+              <div className="text-sm font-medium text-gray-500 dark:text-white">
                 Email address
               </div>
               <input
@@ -61,25 +63,27 @@ const Profile = () => {
                   toast.error("Cannot change Email");
                 }}
                 value={auth.user.email}
-                className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 p-2"
+                className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 p-2 dark:bg-blue-100 rounded-md"
               />
             </div>
             <div className="flex justify-between py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <div className="text-sm font-medium text-gray-500">
+              <div className="text-sm font-medium text-gray-500 dark:text-white">
                 Phone number
               </div>
               <input
                 onChange={(e) => setPhone(e.target.value)}
                 value={phone}
-                className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2  p-2"
+                className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2  p-2 dark:bg-blue-100 rounded-md"
               />
             </div>
             <div className="flex justify-between py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <div className="text-sm font-medium text-gray-500">Address</div>
+              <div className="text-sm font-medium text-gray-500 dark:text-white">
+                Address
+              </div>
               <input
                 onChange={(e) => setAddress(e.target.value)}
                 value={address}
-                className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2  p-2"
+                className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2  p-2 dark:bg-blue-100 rounded-md"
               />
             </div>
             <div>

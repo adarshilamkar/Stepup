@@ -12,7 +12,9 @@ root.render(
   <AuthProvider>
     <CartProvider>
       <BrowserRouter>
-        <App />
+        <div className="dark:bg-gray-900">
+          <App />
+        </div>
       </BrowserRouter>
     </CartProvider>
   </AuthProvider>

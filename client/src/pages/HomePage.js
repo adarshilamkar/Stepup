@@ -57,13 +57,17 @@ const HomePage = () => {
   }, [checked]);
 
   return (
-    <div className="flex flex-wrap justify-center mx-2 mt-3">
+    <div className="flex flex-wrap justify-center mx-2 mt-3 dark:bg-gray-900">
       {/* {JSON.stringify(cart)} */}
-      <div className="w-2/12 inline-block border-red-700 overflow-x-hidden bg-blue-50  rounded-xl py-4 px-7">
-        <h2 className="text-center font-bold text-gray-800">Filters</h2>
-        <h3 className="text-center text-gray-700 mt-1">Min Price</h3>
+      <div className="w-2/12 inline-block border-red-700 overflow-x-hidden bg-blue-50  rounded-xl py-4 px-7 dark:bg-gray-800 dark:text-white">
+        <h2 className="text-center font-bold text-gray-800 dark:text-white">
+          Filters
+        </h2>
+        <h3 className="text-center text-gray-700 mt-1 dark:text-white">
+          Min Price
+        </h3>
         <input
-          className="border border-gray-800 rounded-md p-1.5 decoration:none w-full mt-1 text-gray-700"
+          className="border border-gray-800 rounded-md p-1.5 decoration:none w-full mt-1 text-gray-800 dark:text-gray-800 dark:bg-blue-100"
           type="number"
           name="minprice"
           value={minprice}
@@ -71,9 +75,11 @@ const HomePage = () => {
             setMinPrice(e.target.value);
           }}
         />
-        <h3 className="text-center text-gray-700 mt-2">Max Price</h3>
+        <h3 className="text-center text-gray-700 mt-2 dark:text-white">
+          Max Price
+        </h3>
         <input
-          className="border border-gray-800 rounded-md p-1.5 decoration:none w-full mt-1 text-gray-700"
+          className="border border-gray-800 rounded-md p-1.5 decoration:none w-full mt-1 text-gray-700 dark:text-gray-800 dark:bg-blue-100"
           type="number"
           name="maxprice"
           value={maxprice}
@@ -81,12 +87,14 @@ const HomePage = () => {
             setMaxPrice(e.target.value);
           }}
         />
-        <h3 className="text-center text-gray-700 mt-2">Categories</h3>
+        <h3 className="text-center text-gray-700 mt-2 dark:text-white">
+          Categories
+        </h3>
         <div className="flex flex-wrap">
           {categories.map((category) => (
             <div className="w-full p-1 text-xl">
               <Checkbox
-                className=" text-gray-700 px-8"
+                className=" text-gray-700 px-8 dark:text-white"
                 key={category._id}
                 onChange={(e) => {
                   e.preventDefault();
