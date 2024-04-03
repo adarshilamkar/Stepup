@@ -7,7 +7,7 @@ const requireSignIn = async (req, res, next) => {
     const decode = await JWT.verify(
       req.headers.authorization,
       process.env.JWT_SECRET
-    ); 
+    );
     // this jwt.verify function returns the id of the user present in the database
     req.user = decode;
     console.log(decode);

@@ -8,6 +8,7 @@ import getProductPhotoController from "../controllers/productControllers/getProd
 import formidable from "express-formidable";
 import productFiltersController from "../controllers/productControllers/productFiltersController.js";
 import getDealsController from "../controllers/productControllers/getDealsController.js"
+import deleteProductController from "../controllers/productControllers/deleteProductController.js"
 const router = express.Router();
 
 // routes
@@ -24,6 +25,7 @@ router.get("/get-products", getProductController);
 router.get("/get-product/:id", getSingleProductController);
 // get photo
 router.get("/product-photo/:pid", getProductPhotoController);
+router.get('/delete/:id',deleteProductController);
 // filter product
 router.post("/product-filters",productFiltersController);
 router.get('/deals',getDealsController);

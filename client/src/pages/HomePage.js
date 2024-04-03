@@ -10,7 +10,7 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [minprice, setMinPrice] = useState(0);
-  const [maxprice, setMaxPrice] = useState(999999999);
+  const [maxprice, setMaxPrice] = useState(9999999);
   const getAllProducts = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/api/v1/product/get-products`
@@ -57,13 +57,13 @@ const HomePage = () => {
   }, [checked]);
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-center mx-2 mt-3">
       {/* {JSON.stringify(cart)} */}
-      <div className="w-2/12 inline-block border border-red-700 overflow-x-hidden">
-        <h2>Filters</h2>
-        <h3>Min Price</h3>
+      <div className="w-2/12 inline-block border-red-700 overflow-x-hidden bg-blue-50  rounded-xl py-4 px-7">
+        <h2 className="text-center font-bold text-gray-800">Filters</h2>
+        <h3 className="text-center text-gray-700 mt-1">Min Price</h3>
         <input
-          className="border border-blue-900 w-full"
+          className="border border-gray-800 rounded-md p-1.5 decoration:none w-full mt-1 text-gray-700"
           type="number"
           name="minprice"
           value={minprice}
@@ -71,9 +71,9 @@ const HomePage = () => {
             setMinPrice(e.target.value);
           }}
         />
-        <h3>Max Price</h3>
+        <h3 className="text-center text-gray-700 mt-2">Max Price</h3>
         <input
-          className="border border-blue-900 w-full"
+          className="border border-gray-800 rounded-md p-1.5 decoration:none w-full mt-1 text-gray-700"
           type="number"
           name="maxprice"
           value={maxprice}
@@ -81,18 +81,21 @@ const HomePage = () => {
             setMaxPrice(e.target.value);
           }}
         />
-        <h3>Category:</h3>
+        <h3 className="text-center text-gray-700 mt-2">Categories</h3>
         <div className="flex flex-wrap">
           {categories.map((category) => (
-            <Checkbox
-              key={category._id}
-              onChange={(e) => {
-                e.preventDefault();
-                handleFilters(e.target.checked, category._id);
-              }}
-            >
-              {category.name}
-            </Checkbox>
+            <div className="w-full p-1 text-xl">
+              <Checkbox
+                className=" text-gray-700 px-8"
+                key={category._id}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleFilters(e.target.checked, category._id);
+                }}
+              >
+                {category.name}
+              </Checkbox>
+            </div>
           ))}
         </div>
       </div>
@@ -106,7 +109,7 @@ const HomePage = () => {
                 discount={product.discount}
                 imageUrl={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                 Name={product.name}
-                Description={`${product.description.substring(0, 35)}...`}
+                Description={`${product.description.substring(0, 30)}...`}
                 readLink={product._id}
                 key={product._id}
               ></Card>

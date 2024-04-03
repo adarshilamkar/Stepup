@@ -11,6 +11,7 @@ const CreateProductForm = () => {
     price: "",
     category: "",
     quantity: "",
+    discount: 0,
     shipping: "",
     photo: null,
   });
@@ -40,6 +41,7 @@ const CreateProductForm = () => {
     formDataToSend.append("price", formData.price);
     formDataToSend.append("category", formData.category);
     formDataToSend.append("quantity", formData.quantity);
+    formDataToSend.append("discount", formData.discount);
     formDataToSend.append("shipping", formData.shipping);
     formDataToSend.append("photo", formData.photo);
     try {
@@ -58,6 +60,7 @@ const CreateProductForm = () => {
         price: "",
         category: "",
         quantity: "",
+        discount: 0,
         shipping: "",
         photo: null,
       });
@@ -71,7 +74,9 @@ const CreateProductForm = () => {
 
   return (
     <div className="max-w-md mx-auto mb-10">
-      <h2 className="text-2xl font-bold mb-4">Product Form</h2>
+      <h2 className="text-xl font-bold my-4 text-center text-gray-800">
+        Product Form
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -116,6 +121,22 @@ const CreateProductForm = () => {
             id="price"
             name="price"
             value={formData.price}
+            onChange={handleChange}
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="discount"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Discount:
+          </label>
+          <input
+            type="number"
+            id="discount"
+            name="discount"
+            value={formData.discount}
             onChange={handleChange}
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
           />

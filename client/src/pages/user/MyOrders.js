@@ -135,10 +135,10 @@ const MyOrders = () => {
                               <div className="col-span-5 lg:col-span-2 flex items-center max-lg:mt-3">
                                 <div className="flex gap-3 lg:block">
                                   <p className="font-medium text-sm whitespace-nowrap leading-6 text-black">
-                                    Expected Delivery Time
+                                    Expected Delivery
                                   </p>
                                   <p className="font-medium text-base whitespace-nowrap leading-7 lg:mt-3 text-emerald-500">
-                                    23rd March 2021
+                                    In {Math.floor(Math.random() * 7)} Days
                                   </p>
                                 </div>
                               </div>

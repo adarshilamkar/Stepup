@@ -42,7 +42,7 @@ const Featured = () => {
 
     localStorage.setItem("cart", JSON.stringify(cart));
     toast.success("Item added to Cart");
-    navigate("/cart");
+    navigate("/user/cart");
   };
   useEffect(() => {
     getProduct();
@@ -55,9 +55,9 @@ const Featured = () => {
           <div className="container mx-auto px-6 flex relative py-16">
             <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
               <span className="w-20 h-2 bg-gray-800 dark:bg-white mb-12" />
-              <h1 className="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none dark:text-white text-gray-800">
+              <h1 className="font-bebas-neue uppercase text-3xl sm:text-4xl font-black flex flex-col leading-none dark:text-white text-gray-800">
                 {feat?.name ? <>{feat.name}</> : <>Product</>}
-                <span className="text-3xl sm:text-5xl">
+                <span className="text-2xl sm:text-2xl">
                   {feat?.category ? <>{feat.category.name}</> : <>Category</>}
                 </span>
               </h1>
@@ -79,7 +79,7 @@ const Featured = () => {
                   (feat?.price * (100 - feat?.discount)) / 100
                 }`}</Link>
                 <Link
-                  to="/cart"
+                  to="/user/cart"
                   onClick={handleAddToCart}
                   className="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-blue-700 text-blue-700 dark:text-white hover:bg-blue-700 hover:text-white text-md"
                 >
@@ -90,7 +90,7 @@ const Featured = () => {
             <div className="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
               <img
                 src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${feat?._id}`}
-                className="max-w-xs md:max-w-sm m-auto"
+                className="max-w-xs md:max-w-sm m-auto mt-5"
                 alt="productImg"
               />
             </div>

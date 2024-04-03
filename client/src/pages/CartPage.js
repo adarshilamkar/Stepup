@@ -16,8 +16,8 @@ const CartPage = () => {
       const order = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/order/cart`,
         {
-          products: cart, // Send the cart directly, assuming it's an array of products
-          user: auth?.user, // Use the user ID directly
+          products: cart,
+          user: auth?.user, 
           address,
           amount: total,
           status: "Pending",

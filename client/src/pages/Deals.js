@@ -18,7 +18,7 @@ const Deals = () => {
 
   return (
     <div>
-      <p className="block text-center my-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <p className="block text-center my-3 text-2xl font-bold tracking-tight text-gray-800 dark:text-white">
         Hurry Up!! Discount Hours Running Out
       </p>
       <div className="flex flex-wrap justify-center">

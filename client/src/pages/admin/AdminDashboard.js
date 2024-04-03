@@ -1,12 +1,12 @@
-import React from 'react'
-import AdminMenu from '../../components/layouts/AdminMenu'
+import React from "react";
+import AdminMenu from "../../components/layouts/AdminMenu";
 
 const AdminDashboard = () => {
   return (
     <div>
-        <AdminMenu></AdminMenu>
+      <AdminMenu></AdminMenu>
     </div>
-  )
-}
+  );
+};
 
-export default AdminDashboard
+export default AdminDashboard;

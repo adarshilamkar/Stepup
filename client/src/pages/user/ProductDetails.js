@@ -45,9 +45,9 @@ const ProductDetails = () => {
           <div className="container mx-auto px-6 flex relative py-16">
             <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
               <span className="w-20 h-2 bg-gray-800 dark:bg-white mb-12" />
-              <h1 className="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none dark:text-white text-gray-800">
+              <h1 className="font-bebas-neue uppercase text-6xl sm:text-4xl font-black flex flex-col leading-none dark:text-white text-gray-800">
                 {product.name ? <>{product.name}</> : <>Product</>}
-                <span className="text-3xl sm:text-5xl">
+                <span className="text-3xl sm:text-2xl">
                   {product.category ? (
                     <>{product.category.name}</>
                   ) : (

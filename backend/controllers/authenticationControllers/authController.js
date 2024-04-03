@@ -3,7 +3,7 @@ import { hashPassword, comparePassword } from "../../helpers/authHelper.js";
 import dotenv from "dotenv";
 import JWT from "jsonwebtoken";
 
-dotenv.config({ path: "../../.env" });
+dotenv.config();
 
 const registerController = async (req, res) => {
   try {
@@ -93,6 +93,7 @@ const loginController = async (req, res) => {
               phone: user.phone,
               address: user.address,
               _id: user._id,
+              role: user.role,
             },
             token,
           });

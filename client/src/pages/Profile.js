@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../components/context/auth";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [auth, setAuth] = useAuth();
@@ -80,6 +81,13 @@ const Profile = () => {
                 value={address}
                 className="outline-none border  mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2  p-2"
               />
+            </div>
+            <div>
+              <Link to={"/user/orders"}>
+                <div className="border border-blue-700 bg-blue-700 rounded-md text-white p-4 text-center">
+                  Show Orders
+                </div>
+              </Link>
             </div>
           </div>
         </div>

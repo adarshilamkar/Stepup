@@ -29,7 +29,7 @@ const Card = ({ imageUrl, Name, discount, Description, readLink, product }) => {
       <div className="text-center max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <Link className="flex justify-center rounded-3xl" to="#">
           <img
-            className="rounded-t-lg w-72  mt-2 p-1 rounded-xl border "
+            className="rounded-t-lg w-full mx-2  mt-2 p-1 rounded-xl  h-60  "
             src={imageUrl}
             alt="product"
           />
@@ -52,7 +52,7 @@ const Card = ({ imageUrl, Name, discount, Description, readLink, product }) => {
               to={`/product/${readLink}`}
               className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Read more
+              Get Details
             </Link>
             <button
               className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
