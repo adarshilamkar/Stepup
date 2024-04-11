@@ -80,7 +80,7 @@ const ProductDetails = () => {
                   (product.price * (100 - product.discount)) / 100
                 }`}</Link>
                 <Link
-                  to="/user/cart"
+                  to="#"
                   onClick={handleAddToCart}
                   className="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-blue-700 text-blue-700 dark:text-white hover:bg-blue-700 hover:text-white text-md"
                 >
