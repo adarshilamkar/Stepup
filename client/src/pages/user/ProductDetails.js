@@ -8,7 +8,7 @@ import {useAuth} from '../../components/context/auth';
 
 const ProductDetails = () => {
   const [cart, setCart] = useCart();
-  const [user,setUser] =useAuth();
+  const [auth,setAuth] =useAuth();
   const params = useParams();
   const [product, setProduct] = useState({});
   const getProductDetails = async () => {
