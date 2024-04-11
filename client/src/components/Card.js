@@ -2,10 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "./context/cart";
 import { useNavigate } from "react-router-dom";
+import {auth,useAuth} from './context/auth';
 import toast from "react-hot-toast";
 const Card = ({ imageUrl, Name, discount, Description, readLink, product }) => {
   const [cart, setCart] = useCart();
+  const [auth,setAuth]=useAuth();
   const addToCart = () => {
+    if(!auth.user){
+      toast.error("Please Login to Add Product");
+    }
+    else{
     const existingItem = cart.find((item) => item._id === product._id);
 
     if (existingItem) {
@@ -23,6 +29,7 @@ const Card = ({ imageUrl, Name, discount, Description, readLink, product }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
     toast.success("Item added to Cart");
     console.log(cart);
+    }
   };
   return (
     <div className="w-80 p-2">
