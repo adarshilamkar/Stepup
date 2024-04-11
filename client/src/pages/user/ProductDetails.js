@@ -4,9 +4,11 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useCart } from "../../components/context/cart";
 import { toast } from "react-hot-toast";
+import {useAuth} from '../../components/context/auth';
 
 const ProductDetails = () => {
   const [cart, setCart] = useCart();
+  const [user,setUser] =useAuth();
   const params = useParams();
   const [product, setProduct] = useState({});
   const getProductDetails = async () => {
@@ -16,6 +18,10 @@ const ProductDetails = () => {
     setProduct(res.data.product);
   };
   const handleAddToCart = () => {
+    if(!auth.user){
+      toast.error("Login to Add to Cart");
+    }
+    else{
     const existingItem = cart.find((item) => item._id === product._id);
 
     if (existingItem) {
@@ -33,6 +39,7 @@ const ProductDetails = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
     toast.success("Item added to Cart");
     console.log(cart);
+    }
   };
   useEffect(() => {
     getProductDetails();
