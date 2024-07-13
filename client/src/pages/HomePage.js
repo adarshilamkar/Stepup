@@ -3,9 +3,9 @@ import axios from "axios";
 import PromoCarousel from "../components/PromoCarousel";
 import CategorySection from "../components/CategorySection";
 import ProductGrid from "../components/ProductGrid";
+import Loader from "../components/Loader"; // Import the Loader component
 
 const HomePage = () => {
-  const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -51,11 +51,7 @@ const HomePage = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        Loading...
-      </div>
-    );
+    return <Loader />; // Display the Loader component while loading
   }
 
   return (
