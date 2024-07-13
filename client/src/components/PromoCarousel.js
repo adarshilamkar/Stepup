@@ -3,15 +3,26 @@ import { Link } from "react-router-dom";
 
 const PromoCarousel = ({ featuredProducts }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false); // State to track loading status
 
   useEffect(() => {
+    setIsLoaded(false); // Reset loading state when products change
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) =>
         prev === featuredProducts.length - 1 ? 0 : prev + 1
       );
     }, 3000);
-    return () => clearInterval(interval);
-  }, [featuredProducts.length]);
+
+    // Simulate product and image loading completion after 2 seconds
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [featuredProducts]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) =>
@@ -27,13 +38,19 @@ const PromoCarousel = ({ featuredProducts }) => {
 
   return (
     <div className="w-full max-w-screen-xl mx-auto mt-4 mb-8 px-4 relative">
-      <div className="flex items-center justify-between ">
+      {/* Loader while products are not loaded */}
+      {!isLoaded && (
+        <div className="flex items-center justify-center absolute inset-0 bg-gray-200 bg-opacity-75 z-10">
+          <p>Loading...</p>
+        </div>
+      )}
+
+      <div className="flex items-center justify-between">
         <div className="w-2/3 relative overflow-hidden shadow-lg">
           <div className="relative h-96">
             {featuredProducts.map((product, index) => (
-              <Link to={`/product/${product._id}`}>
+              <Link to={`/product/${product._id}`} key={product._id}>
                 <div
-                  key={product._id}
                   className={`absolute inset-0 transition-opacity duration-1000 ${
                     index === currentSlide ? "opacity-100" : "opacity-0"
                   }`}
@@ -47,6 +64,7 @@ const PromoCarousel = ({ featuredProducts }) => {
                       src={`${process.env.REACT_APP_API}/api/v1/product//product-photo/${product._id}`}
                       alt={product.name}
                       className="w-full h-full object-cover"
+                      onLoad={() => setIsLoaded(true)} // Update loading state when image is loaded
                     />
                   </div>
                 </div>
@@ -65,13 +83,11 @@ const PromoCarousel = ({ featuredProducts }) => {
             <p className="text-lg">
               {featuredProducts[currentSlide]?.description}
             </p>
-            {/* <button className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-lg">
-              Checkout
-            </button> */}
           </div>
         </div>
       </div>
       <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex justify-between w-full px-4">
+        {/* Arrow icons for navigation */}
         <button
           className="bg-black bg-opacity-50 text-white p-2 rounded-full"
           onClick={prevSlide}

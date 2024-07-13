@@ -35,7 +35,7 @@ app.use("/api/v1/review",reviewRoute);
 
 app.get("/", (req, res) => {
   res.send({
-    message: "Welcome to Ecom Web",
+    message: "Welcome to Stepup Shoes Backend",
   });
 });
 

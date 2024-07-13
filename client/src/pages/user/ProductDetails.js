@@ -18,21 +18,6 @@ const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [reviewText, setReviewText] = useState("");
   const [reviewRating, setReviewRating] = useState(5); // Default rating
-  const objectIdToDateString = (id) => {
-    // Extract the timestamp (first 4 bytes of ObjectId, 8 characters in hexadecimal)
-    const timestampHex = id.substring(0, 8);
-
-    // Convert the hexadecimal timestamp to an integer
-    const timestampInt = parseInt(timestampHex, 16);
-
-    // Create a Date object using the timestamp (multiply by 1000 to convert to milliseconds)
-    const date = new Date(timestampInt * 1000);
-
-    // Format the date as a string (you can customize the format as needed)
-    const dateString = date.toLocaleString(); // Default locale format
-
-    return dateString;
-  };
   const getProductDetails = async () => {
     const res = await axios.get(
       `${process.env.REACT_APP_API}/api/v1/product/get-product/${params.id}`
@@ -116,10 +101,11 @@ const ProductDetails = () => {
 
   useEffect(() => {
     getProductDetails();
-  }, []);
-  useEffect(() => {
     calcrating();
-  }, [reviews]);
+  }, []);
+  // useEffect(() => {
+  //   calcrating();
+  // }, [reviews]);
   return (
     <div>
       {/* {product.description ? <>{Array.isArray(product.description)}</> : <>nahi aaya</>} */}
