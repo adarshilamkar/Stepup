@@ -1,12 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { toast } from "react-hot-toast";
 import { useCart } from "../context/cart";
+import axios from "axios";
+import "./Header.css"; // Import your CSS file for header styles
 
 const Header = () => {
-  const [cart, setCart] = useCart();
+  const [cart] = useCart();
   const [auth, setAuth] = useAuth();
+  const [currSale, setCurrSale] = useState(null);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  // Function to calculate time left until the end date
+  const calculateTimeLeft = (endDate) => {
+    const difference = new Date(endDate) - new Date();
+    if (difference > 0) {
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      return { days, hours, minutes, seconds };
+    } else {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+  };
+
+  // Fetch all sales and set the current sale if it is active
+  const getSale = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/sale/allsales`
+      );
+      if (res.data.success) {
+        const sales = res.data.sales;
+        const currDate = new Date();
+        for (let sale of sales) {
+          const startDate = new Date(sale.start);
+          const endDate = new Date(sale.end);
+          if (currDate >= startDate && currDate <= endDate) {
+            setCurrSale(sale);
+            setTimeLeft(calculateTimeLeft(endDate));
+            break;
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Failed to fetch sales data:", error);
+      toast.error("Failed to load current sales.");
+    }
+  };
+
+  // Handle user logout
   const handleLogout = () => {
     localStorage.removeItem("auth");
     setAuth({
@@ -16,89 +68,93 @@ const Header = () => {
     });
     toast.success("Logged out Successfully");
   };
+
+  // Fetch sale data on component mount
+  useEffect(() => {
+    getSale();
+    //eslint-disable-next-line
+  }, []);
+
+  // Update countdown every second
+  useEffect(() => {
+    let timer;
+    if (currSale) {
+      timer = setInterval(() => {
+        const newTimeLeft = calculateTimeLeft(currSale.end);
+        setTimeLeft(newTimeLeft);
+
+        // Stop the timer when the countdown ends
+        if (
+          newTimeLeft.days === 0 &&
+          newTimeLeft.hours === 0 &&
+          newTimeLeft.minutes === 0 &&
+          newTimeLeft.seconds === 0
+        ) {
+          clearInterval(timer);
+        }
+      }, 1000); // Update every second
+    }
+    return () => clearInterval(timer); // Cleanup on component unmount
+  }, [currSale]);
+
   return (
     <div>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav className="bg-slate-100 border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="https://png.pngtree.com/png-vector/20220207/ourmid/pngtree-e-letter-logo-ecommerce-shop-store-design-png-image_4381099.png"
-              className="h-8"
-              alt="Logo"
+              src="/brandlogoup.png"
+              className="h-12"
+              alt=""
+              // onerror="this.src='https://t4.ftcdn.net/jpg/03/30/12/09/240_F_330120920_wvq4FZFzoZtgZ4hJfLyiMNv9veCajDXV.jpg';"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap  text-blue-600">
-              Ecom
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-600">
+              Stepup
             </span>
           </Link>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 bg-blue-50"
             id="navbar-user"
           >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 bg-blue-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-blue-50 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <Link
-                  to="/"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  aria-current="page"
-                >
+                <Link to="/" className="nav-link" aria-current="page">
                   Home
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/featured"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Featured
-                </Link>
-              </li>
-              <li>
+              {/* <li>
                 <Link
                   to="/deals"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="nav-link"
                 >
                   Deals
                 </Link>
-              </li>
+              </li> */}
               {auth.user ? (
                 <>
                   {auth.user.role ? (
-                    <>
-                      <li>
-                        <Link
-                          to="/admin/dashboard"
-                          className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                        >
-                          Dashboard
-                        </Link>
-                      </li>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                    <li>
+                      <Link to="/admin/dashboard" className="nav-link">
+                        Dashboard
+                      </Link>
+                    </li>
+                  ) : null}
                   <li>
-                    <Link
-                      to="/user/profile"
-                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                    >
+                    <Link to="/user/profile" className="nav-link">
                       Profile
                     </Link>
                   </li>
                   <li>
                     <Link
                       to="/user/cart"
-                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      className="nav-link"
                     >{`Cart (${cart.length})`}</Link>
                   </li>
                   <li>
-                    <Link
-                      to="/"
-                      onClick={handleLogout}
-                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                    >
+                    <Link to="/" onClick={handleLogout} className="nav-link">
                       LogOut
                     </Link>
                   </li>
@@ -106,18 +162,12 @@ const Header = () => {
               ) : (
                 <>
                   <li>
-                    <Link
-                      to="/login"
-                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                    >
+                    <Link to="/login" className="nav-link">
                       Login
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to="/register"
-                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                    >
+                    <Link to="/register" className="nav-link">
                       Register
                     </Link>
                   </li>
@@ -127,6 +177,18 @@ const Header = () => {
           </div>
         </div>
       </nav>
+      {currSale ? (
+        <div className="pt-4 pb-4 flex justify-center bg-slate-200 shadow-md">
+          <span className="text-gray-600 font-semibold">
+            {currSale.name} Sale Ends in{" "}
+            <span className="text-red-500">
+              {`${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`}
+            </span>
+          </span>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

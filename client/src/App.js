@@ -15,12 +15,12 @@ import Profile from "./pages/Profile";
 import ProductDetails from "./pages/user/ProductDetails";
 import CartPage from "./pages/CartPage";
 import MyOrders from "./pages/user/MyOrders";
-import Featured from "./pages/Featured";
-import Deals from "./pages/Deals";
 import AllUsers from "./pages/admin/AllUsers";
 import ManageCategory from "./pages/admin/ManageCategory";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AllOrders from "./pages/admin/AllOrders";
+import Sale from "./pages/admin/Sale";
+import CategoryProducts from "./pages/CategoryProducts";
 const App = () => {
   return (
     <Layout>
@@ -30,8 +30,10 @@ const App = () => {
           path="/product/:id"
           element={<ProductDetails></ProductDetails>}
         ></Route>
-        <Route path="/featured" element={<Featured></Featured>}></Route>
-        <Route path="/deals" element={<Deals></Deals>}></Route>
+        <Route
+          path="/category/:id"
+          element={<CategoryProducts></CategoryProducts>}
+        ></Route>
         <Route path="/about-dev" element={<About></About>}></Route>
         <Route path="/contact" element={<Contact></Contact>}></Route>
         <Route path="/policy" element={<Policy></Policy>}></Route>
@@ -50,6 +52,7 @@ const App = () => {
           <Route path="products" element={<Products></Products>}></Route>
           <Route path="users" element={<AllUsers></AllUsers>}></Route>
           <Route path="orders" element={<AllOrders></AllOrders>}></Route>
+          <Route path="sale" element={<Sale></Sale>}></Route>
           <Route
             path="categories"
             element={<ManageCategory></ManageCategory>}

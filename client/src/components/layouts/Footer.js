@@ -4,19 +4,20 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-white dark:bg-gray-900 mt-5">
+      <footer className="bg-blue-50 dark:bg-gray-900 mt-5">
         <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <Link to="/" className="flex items-center">
                 <img
-                  src="https://png.pngtree.com/png-vector/20220207/ourmid/pngtree-e-letter-logo-ecommerce-shop-store-design-png-image_4381099.png"
-                  className="h-8 me-3"
-                  alt="Ecom Logo"
+                  src="/brandlogofinal.png"
+                  alt="Logo"
+                  height={100}
+                  width={150}
                 />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-blue-600">
+                {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-blue-600">
                   Ecom
-                </span>
+                </span> */}
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -87,7 +88,7 @@ const Footer = () => {
             <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
               © 2024{" "}
               <Link to="/" className="hover:underline">
-                Ecom™
+                StepUp™
               </Link>
               . All Rights Reserved.
             </span>

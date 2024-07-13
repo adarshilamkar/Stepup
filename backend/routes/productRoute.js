@@ -7,8 +7,12 @@ import getSingleProductController from "../controllers/productControllers/getSin
 import getProductPhotoController from "../controllers/productControllers/getProductPhotoController.js";
 import formidable from "express-formidable";
 import productFiltersController from "../controllers/productControllers/productFiltersController.js";
-import getDealsController from "../controllers/productControllers/getDealsController.js"
-import deleteProductController from "../controllers/productControllers/deleteProductController.js"
+import getDealsController from "../controllers/productControllers/getDealsController.js";
+import deleteProductController from "../controllers/productControllers/deleteProductController.js";
+import getReviewController from "../controllers/reviewControllers/getReviewController.js";
+import getPincodeController from "../controllers/pincodeControllers/getPincodeController.js";
+import editProduct from "../controllers/productControllers/editProduct.js";
+import productModels from "../models/productModels.js";
 const router = express.Router();
 
 // routes
@@ -25,8 +29,11 @@ router.get("/get-products", getProductController);
 router.get("/get-product/:id", getSingleProductController);
 // get photo
 router.get("/product-photo/:pid", getProductPhotoController);
-router.get('/delete/:id',deleteProductController);
+router.get("/delete/:id", deleteProductController);
 // filter product
-router.post("/product-filters",productFiltersController);
-router.get('/deals',getDealsController);
+router.post("/product-filters", productFiltersController);
+router.get("/deals", getDealsController);
+// get reviews
+router.get("/reviews/:id", getReviewController);
+router.put("/update/:id", editProduct);
 export default router;

@@ -11,6 +11,7 @@ const CreateCategory = () => {
   const [auth] = useAuth();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
+  const [image, setImage] = useState("");
   const handleDelete = async (category) => {
     const result = await axios.get(
       `${process.env.REACT_APP_API}/api/v1/category/delete-category/${category._id}`,
@@ -31,7 +32,7 @@ const CreateCategory = () => {
     e.preventDefault();
     const result = await axios.post(
       `${process.env.REACT_APP_API}/api/v1/category/create-category`,
-      { name },
+      { name, image },
       {
         headers: {
           Authorization: `${auth.token}`,
@@ -41,6 +42,7 @@ const CreateCategory = () => {
     if (result.data.success) {
       toast.success(`${name} created Successfully`);
       setName("");
+      setImage("");
       getAllCategories();
     }
   };
@@ -64,8 +66,10 @@ const CreateCategory = () => {
       <AdminMenu></AdminMenu>
       <CategoryForm
         handleSubmit={handleSubmit}
-        value={name}
-        setValue={setName}
+        name={name}
+        setName={setName}
+        image={image}
+        setImage={setImage}
       ></CategoryForm>
       <div className="mx-5 mt-2">
         <div className="font-bold text-center my-5 text-gray-800 dark:text-white">

@@ -1,11 +1,17 @@
 import categoryModel from '../../models/categoryModels.js'
 const createCategoryController=async(req,res)=>{
     try {
-        const {name}=req.body;
+        const {name,image}=req.body;
         if(!name){
             return res.status(401).send({
                 success:false,
                 message:"name is required"
+            })
+        }
+        if(!image){
+            return res.status(401).send({
+                success:false,
+                message:"image is required"
             })
         }
         const existing_cat=await categoryModel.findOne({name});
@@ -15,7 +21,7 @@ const createCategoryController=async(req,res)=>{
                 message:"category already exists"
             })
         }
-        const category=await new categoryModel({name}).save();
+        const category=await new categoryModel({name,image}).save();
         res.status(201).send({
             success:true,
             message:"new category created successfully",

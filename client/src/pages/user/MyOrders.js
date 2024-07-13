@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   const cancelOrder = async (id) => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/api/v1/order/delete/${id}`
@@ -115,10 +115,10 @@ const MyOrders = () => {
                               <div className="col-span-5 lg:col-span-1 flex items-center max-lg:mt-3">
                                 <div className="flex gap-3 lg:block">
                                   <p className="font-medium text-sm leading-7 text-gray-800 dark:text-white">
-                                    Price
+                                    Delivery
                                   </p>
-                                  <p className="lg:mt-4 font-medium text-sm leading-7 text-indigo-600">
-                                    $ {product.price}
+                                  <p className="lg:mt-4 font-medium text-sm leading-7 text-indigo-600 ">
+                                    In {Math.floor(Math.random() * 7)} Days
                                   </p>
                                 </div>
                               </div>
@@ -135,10 +135,10 @@ const MyOrders = () => {
                               <div className="col-span-5 lg:col-span-2 flex items-center max-lg:mt-3">
                                 <div className="flex gap-3 lg:block">
                                   <p className="font-medium text-sm whitespace-nowrap leading-6 text-gray-800 dark:text-white">
-                                    Expected Delivery
+                                    Payment Id
                                   </p>
                                   <p className="font-medium text-base whitespace-nowrap leading-7 lg:mt-3 text-emerald-500">
-                                    In {Math.floor(Math.random() * 7)} Days
+                                    {order.paymentId}
                                   </p>
                                 </div>
                               </div>
@@ -150,34 +150,65 @@ const MyOrders = () => {
                   ))}
                   <div className="w-full border-t border-gray-200 px-6 flex flex-col lg:flex-row items-center justify-between ">
                     <div className="flex flex-col sm:flex-row items-center max-lg:border-b border-gray-200 dark:border-gray-800">
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          cancelOrder(order._id);
-                        }}
-                        className="flex outline-0 py-6 sm:pr-6  sm:border-r border-gray-200  dark:text-white whitespace-nowrap gap-2 items-center justify-center font-semibold group text-lg text-gray-800 bg-white dark:bg-gray-900 rounded-xl transition-all duration-500 hover:text-indigo-600 dark:border-gray-800"
-                      >
-                        <svg
-                          className="stroke-black dark:stroke-white transition-all duration-500 group-hover:stroke-indigo-600"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={22}
-                          height={22}
-                          viewBox="0 0 22 22"
-                          fill="none"
+                      {order.status === "Delivered" ? (
+                        <button
+                          disabled
+                          onClick={(e) => {
+                            e.preventDefault();
+                            toast.error("Order Delivered");
+                          }}
+                          className="flex outline-0 py-6 sm:pr-6  sm:border-r border-gray-200  dark:text-white whitespace-nowrap gap-2 items-center justify-center font-semibold group text-lg text-gray-400 bg-white dark:bg-gray-900 rounded-xl  dark:border-gray-800"
                         >
-                          <path
-                            d="M5.5 5.5L16.5 16.5M16.5 5.5L5.5 16.5"
-                            stroke
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                        Cancel Order
-                      </button>
+                          <svg
+                            className="stroke-gray-400 dark:stroke-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={22}
+                            height={22}
+                            viewBox="0 0 22 22"
+                            fill="none"
+                          >
+                            <path
+                              d="M5.5 5.5L16.5 16.5M16.5 5.5L5.5 16.5"
+                              stroke
+                              strokeWidth="1.6"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          Cancel Order
+                        </button>
+                      ) : (
+                        <>
+                          {" "}
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              cancelOrder(order._id);
+                            }}
+                            className="flex outline-0 py-6 sm:pr-6  sm:border-r border-gray-200  dark:text-white whitespace-nowrap gap-2 items-center justify-center font-semibold group text-lg text-gray-800 bg-white dark:bg-gray-900 rounded-xl transition-all duration-500 hover:text-indigo-600 dark:border-gray-800"
+                          >
+                            <svg
+                              className="stroke-black dark:stroke-white transition-all duration-500 group-hover:stroke-indigo-600"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width={22}
+                              height={22}
+                              viewBox="0 0 22 22"
+                              fill="none"
+                            >
+                              <path
+                                d="M5.5 5.5L16.5 16.5M16.5 5.5L5.5 16.5"
+                                stroke
+                                strokeWidth="1.6"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                            Cancel Order
+                          </button>
+                        </>
+                      )}
                     </div>
                     <p className="font-semibold text-lg text-gray-800 dark:text-white py-6">
                       Total Price:{" "}
-                      <span className="text-indigo-600"> ${order.amount}</span>
+                      <span className="text-indigo-600"> ₹{order.amount}</span>
                     </p>
                   </div>
                 </div>

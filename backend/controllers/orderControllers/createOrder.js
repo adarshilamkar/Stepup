@@ -1,13 +1,14 @@
 import orderModel from "../../models/orderModel.js";
 const createOrder = async (req, res) => {
   try {
-    const { products, user, address, amount, status } = req.body;
+    const { products, user, address, amount, status, paymentId } = req.body;
     const order = await new orderModel({
       products,
       user,
       address,
       amount,
       status,
+      paymentId,
     }).save();
     if (!order) {
       return res.status(400).send({

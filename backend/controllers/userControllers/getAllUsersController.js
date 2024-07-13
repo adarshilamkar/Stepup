@@ -9,7 +9,5 @@ const getAllUsersController=async(req,res)=>{
             users:response
         })
     }
-
-
 }
 export default getAllUsersController

@@ -4,19 +4,48 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
-    description: {
+    info: {
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
+    type: {
+      type: [String],
+    },
+    model: {
+      type: [String],
+    },
+    // reviews: {
+    //   type: [String],
+    // },
+    description: {
+      type: [String],
       required: true,
     },
-    discount:{
-      type:Number,
-      required:true,
+    specifications: {
+      type: [String],
+      required: true,
+    },
+    material: {
+      type: [String],
+    },
+    tags: {
+      type: [String],
+      required: true,
+    },
+    price: {
+      type: [String],
+      required: true,
+    },
+    discount: {
+      type: [String],
+      required: true,
+    },
+    seller: {
+      type: mongoose.ObjectId,
+      ref: "users",
+      required: true,
     },
     category: {
       type: mongoose.ObjectId,
@@ -30,6 +59,9 @@ const productSchema = new mongoose.Schema(
     photo: {
       data: Buffer,
       contentType: String,
+    },
+    otherphoto: {
+      type: [String],
     },
     shipping: {
       type: String,

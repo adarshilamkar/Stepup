@@ -2,7 +2,7 @@ import orderModel from "../../models/orderModel.js";
 
 const getAllOrdersAdmin = async (req, res) => {
   try {
-    const orders = await orderModel.find({});
+    const orders = await orderModel.find({}).populate("user");
     res.status(200).send({
       message: "Got all orders of the user",
       success: true,

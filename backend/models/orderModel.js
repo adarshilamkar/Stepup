@@ -9,11 +9,15 @@ const orderSchema = new mongoose.Schema(
     user: {
       type: mongoose.ObjectId,
       ref: "users",
-      required:true
+      required: true,
     },
-    address:{
-      type:String,
-      required:true
+    paymentId: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
     },
     amount: {
       type: Number,
