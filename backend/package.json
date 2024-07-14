@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon server.js",
-    "dev": "nodemon server.js" 
+    "server": "nodemon index.js",
+    "dev": "nodemon index.js" ,
+    "start":"node index.js"
   },
   "author": "\"Piyush Gaur\"",
   "license": "ISC",
