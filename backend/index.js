@@ -1,19 +1,16 @@
-import crypto from "crypto";
 import express from "express";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import authRoute from "./routes/authRoute.js";
 import categoryRoute from "./routes/categoryRoute.js";
 import productRoute from "./routes/productRoute.js";
-import orderModel from "./models/orderModel.js";
 import cors from "cors";
 import orderRoute from "./routes/orderRoute.js";
-import { requireSignIn } from "./middlewares/authMiddleware.js";
 import userRoute from "./routes/userRoute.js";
 import pinRoute from "./routes/pinRoute.js";
 import saleRoute from "./routes/saleRoute.js";
 import Razorpay from "razorpay";
-import reviewRoute from './routes/reviewRoute.js'
+import reviewRoute from "./routes/reviewRoute.js";
 dotenv.config({ path: "../.env" });
 
 const PORT = process.env.PORT || 8000;
@@ -31,7 +28,7 @@ app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/pin", pinRoute);
 app.use("/api/v1/sale", saleRoute);
-app.use("/api/v1/review",reviewRoute);
+app.use("/api/v1/review", reviewRoute);
 
 app.get("/", (req, res) => {
   res.send({
