@@ -10,7 +10,7 @@ const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true); // State for loading indicator
-  const API_URL = process.env.REACT_APP_API;
+  const API_URL = process.env.REACT_APP_API_SECOND || process.env.REACT_APP_API;
 
   useEffect(() => {
     fetchAllProducts();
