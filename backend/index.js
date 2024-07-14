@@ -11,7 +11,7 @@ import pinRoute from "./routes/pinRoute.js";
 import saleRoute from "./routes/saleRoute.js";
 import Razorpay from "razorpay";
 import reviewRoute from "./routes/reviewRoute.js";
-dotenv.config({ path: "../.env" });
+dotenv.config();
 
 const PORT = process.env.PORT || 8000;
 
