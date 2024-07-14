@@ -3,7 +3,11 @@
 
 To deploy this project run:
 
-1-> Clone the project to your local system
+1-> Clone the project to your local system using
+
+```bash
+  https://github.com/piyushgr/Stepup.git
+```
 
 2-> Go Inside the backend directory
 
