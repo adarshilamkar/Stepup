@@ -113,12 +113,12 @@ const ProductDetails = () => {
                 <h1 className="font-bebas-neue sm:text-2xl font-bold flex flex-col dark:text-white text-gray-800">
                   {product.name ? <>{product.name}</> : <>Product</>}
                 </h1>
-                <p className="font-bebas-neue text-xl text-gray-700 dark:text-white">
+                <p className="font-bebas-neue text-md xl:text-xl text-gray-700 dark:text-white">
                   {product ? product.info : "info"}
                 </p>
                 <p className="font-bebas-neue text-xl text-gray-600 dark:text-white mt-6">
                   <span>
-                    <span className="font-bold text-gray-800">
+                    <span className="font-bold text-gray-800 dark:text-white">
                       ₹
                       {product.price
                         ? (product.price[productno] *
@@ -143,15 +143,17 @@ const ProductDetails = () => {
                 <div className="my-3">
                   {product.type ? (
                     <>
-                      <span className="font-semibold">SELECT TYPE</span>
+                      <span className="font-semibold text-gray-800 dark:text-white">
+                        SELECT TYPE
+                      </span>
                       <div>
                         {product.type.map((type, index) => (
                           <button
                             key={index}
                             onClick={() => setProductNo(index)}
-                            className={`px-4 py-2 mr-3 my-1 rounded-lg bg-gray-200 text-gray-700 dark:text-white focus:outline-none ${
+                            className={`px-4 py-2 mr-3 my-1 rounded-lg bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none ${
                               productno === index
-                                ? "bg-gray-800 text-white"
+                                ? "bg-gray-800 dark:bg-gray-200 dark:text-gray-800 text-white"
                                 : ""
                             }`}
                           >
@@ -188,7 +190,7 @@ const ProductDetails = () => {
           </div>
 
           <div>
-            <div className="text-center text-gray-800 font-semibold text-lg my-2">
+            <div className="text-center text-gray-800 font-semibold text-lg my-2 dark:text-white">
               More Images
             </div>
             {product.otherphoto ? (
@@ -262,7 +264,7 @@ const ProductDetails = () => {
               <div className="lg:max-w-[40vw]">
                 {reviews ? (
                   <div className="max-w-4xl mx-auto py-8 px-4">
-                    <h1 className="text-xl font-semibold mb-8">
+                    <h1 className="text-xl font-semibold mb-8 dark:text-white">
                       Customer Reviews
                     </h1>
                     <div className="flex flex-col lg:flex-row justify-evenly">
@@ -319,7 +321,7 @@ const ProductDetails = () => {
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
                   placeholder="Write your review here..."
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none"
                   rows="4"
                 ></textarea>
                 <div className="flex items-center mt-4">
