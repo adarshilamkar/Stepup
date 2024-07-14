@@ -143,13 +143,17 @@ const ProductDetails = () => {
                 <div className="my-3">
                   {product.type ? (
                     <>
-                      <span className=" font-semibold">SELECT TYPE</span>
+                      <span className="font-semibold">SELECT TYPE</span>
                       <div>
                         {product.type.map((type, index) => (
                           <button
                             key={index}
                             onClick={() => setProductNo(index)}
-                            className="px-4 py-2 mr-3 my-1 rounded-lg bg-gray-200 text-gray-700 dark:text-white hover:bg-gray-300 hover:text-gray-800"
+                            className={`px-4 py-2 mr-3 my-1 rounded-lg bg-gray-200 text-gray-700 dark:text-white focus:outline-none ${
+                              productno === index
+                                ? "bg-gray-800 text-white"
+                                : ""
+                            }`}
                           >
                             {type}
                           </button>
@@ -164,7 +168,7 @@ const ProductDetails = () => {
                   <Link
                     to="#"
                     onClick={handleAddToCart}
-                    className="uppercase py-3 px-24 rounded  border-2 text-white  bg-blue-700 hover:bg-blue-600 transition duration-300 text-md"
+                    className="uppercase py-3 px-24 rounded border-2 text-white bg-blue-700 hover:bg-blue-600 transition duration-300 text-md"
                   >
                     Add to Cart
                   </Link>
