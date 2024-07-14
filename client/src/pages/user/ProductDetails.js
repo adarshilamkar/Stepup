@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import { useAuth } from "../../components/context/auth";
 import ImageGallery from "../../components/product/ImageGallery";
 import CheckPincode from "../../components/product/CheckPin";
-import Loader from "../../components/Loader"; // Import your loader component
+import Loader from "../../components/Loader";
 
 const ProductDetails = () => {
   const [cart, setCart] = useCart();
@@ -17,8 +17,8 @@ const ProductDetails = () => {
   const [productno, setProductNo] = useState(0);
   const [product, setProduct] = useState({});
   const [reviewText, setReviewText] = useState("");
-  const [reviewRating, setReviewRating] = useState(5); // Default rating
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [reviewRating, setReviewRating] = useState(5);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getProductDetails = async () => {
     try {
@@ -30,10 +30,10 @@ const ProductDetails = () => {
       );
       setProduct(res.data.product);
       setReviews(reviewsRes.data.reviews);
-      setIsLoading(false); // Set loading to false once data is fetched
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching product details:", error);
-      setIsLoading(false); // Handle error and set loading to false
+      setIsLoading(false);
     }
   };
 
@@ -104,12 +104,12 @@ const ProductDetails = () => {
   return (
     <div>
       {isLoading ? (
-        <Loader /> // Render loader while loading
+        <Loader />
       ) : (
         <main className="dark:bg-gray-800 bg-white relative overflow-x-hidden">
           <div className="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
-            <div className="container mx-auto px-6 flex relative py-16">
-              <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
+            <div className="container mx-auto px-6 flex flex-col lg:flex-row relative py-16">
+              <div className="lg:w-2/5 flex flex-col relative z-20 mb-8 lg:mb-0">
                 <h1 className="font-bebas-neue sm:text-2xl font-bold flex flex-col dark:text-white text-gray-800">
                   {product.name ? <>{product.name}</> : <>Product</>}
                 </h1>
@@ -177,7 +177,7 @@ const ProductDetails = () => {
                   <CheckPincode />
                 </div>
               </div>
-              <div className="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
+              <div className="lg:w-3/5 flex justify-center lg:justify-end relative">
                 <img
                   src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                   className="max-w-xs md:max-w-sm m-auto"
@@ -197,10 +197,10 @@ const ProductDetails = () => {
               <>"Other"</>
             )}
           </div>
-          <div className=" mx-8">
-            <div className="flex justify-evenly">
-              <div className="max-w-[40vw]">
-                <div className="w-[40vw] mx-auto">
+          <div className="mx-4 md:mx-8">
+            <div className="flex flex-col lg:flex-row justify-evenly">
+              <div className="lg:max-w-[40vw]">
+                <div className="w-full mx-auto">
                   <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
                     <h2 className="text-xl font-semibold mb-4">
                       Product Specifications
@@ -259,15 +259,15 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="max-w-[40vw]">
+              <div className="lg:max-w-[40vw]">
                 {reviews ? (
                   <div className="max-w-4xl mx-auto py-8 px-4">
                     <h1 className="text-xl font-semibold mb-8">
                       Customer Reviews
                     </h1>
-                    <div className="flex justify-evenly flex-col">
+                    <div className="flex flex-col lg:flex-row justify-evenly">
                       {reviews.map((review) => (
-                        <div className="bg-white rounded-lg shadow-lg p-6 mb-4 w-[40vw]">
+                        <div className="bg-white rounded-lg shadow-lg p-6 mb-4 lg:w-[40vw]">
                           <div className="flex items-center mb-4">
                             <div className="flex-shrink-0 mr-4">
                               <img
@@ -301,7 +301,7 @@ const ProductDetails = () => {
                           </div>
                           <p className="text-gray-700 mb-2">{review.comment}</p>
                           <p className="text-gray-400 text-sm mb-2">
-                            {review.updatedAt.toLocaleString()}
+                            {new Date(review.updatedAt).toLocaleString()}
                           </p>
                         </div>
                       ))}
@@ -319,7 +319,7 @@ const ProductDetails = () => {
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
                   placeholder="Write your review here..."
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none dark:bg-gray-700 dark:text-white"
                   rows="4"
                 ></textarea>
                 <div className="flex items-center mt-4">

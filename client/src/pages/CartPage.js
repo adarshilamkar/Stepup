@@ -4,6 +4,15 @@ import { useCart } from "../components/context/cart";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
+// Loader component to display while data is loading
+const Loader = () => {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-gray-900"></div>
+    </div>
+  );
+};
+
 const CartPage = () => {
   const [auth] = useAuth();
   const [cart, setCart] = useCart();
@@ -12,16 +21,28 @@ const CartPage = () => {
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [can, setCan] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+
+  // Fetch cart data and set loading state accordingly
+  useEffect(() => {
+    // Simulate loading delay with setTimeout (replace with actual API call)
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // Adjust timeout as needed for your use case
+  }, []);
 
   const handlePayment = async () => {
+    // Pincode validation
     if (pincode.length !== 6) {
       toast.error("Enter a valid 6-digit Pincode");
       setCan(false);
       return;
     }
+
     try {
+      // Check if delivery is available at the pincode
       const availcodes = ["281001", "492010", "281204", "492001"];
-      var k = false;
+      let k = false;
       for (let i = 0; i < 4; i++) {
         if (availcodes[i] === pincode) {
           setCan(true);
@@ -36,9 +57,11 @@ const CartPage = () => {
       toast.error("Failed to fetch pincode details");
       console.error("Error fetching pincode details:", error);
     }
+
+    // If delivery available, proceed with payment
     if (can) {
       if (total <= 0) {
-        toast.error("Please add some item");
+        toast.error("Please add some items to your cart");
         return;
       } else if (!address) {
         toast.error("Please enter your address");
@@ -101,6 +124,7 @@ const CartPage = () => {
       }
     }
   };
+
   // Calculate total price and total item count of the cart
   const calcTotal = () => {
     if (cart.length > 0) {
@@ -186,6 +210,10 @@ const CartPage = () => {
     }
   };
 
+  if (isLoading) {
+    return <Loader />; // Show loader while data is loading
+  }
+
   return (
     <div>
       {auth.token ? (
@@ -195,13 +223,12 @@ const CartPage = () => {
               <div className="grid grid-cols-12">
                 <div className="col-span-12 xl:col-span-8 lg:pr-8 lg:py-4 w-full max-xl:max-w-3xl max-xl:mx-auto">
                   <div className="flex items-center justify-between pb-8 border-b border-gray-300">
-                    <h2 className="font-manrope font-bold text-3xl leading-10 text-gray-800 dark:text-white">
+                    <h2 className="mt-2 font-manrope font-bold text-xl xl:text-3xl leading-10 text-gray-800 dark:text-white">
                       Shopping Cart
                     </h2>
-                    <h2 className="font-manrope font-bold text-3xl leading-10 text-gray-800 dark:text-white">
+                    <h2 className="mt-2 font-manrope font-bold text-xl xl:text-3xl leading-10 text-gray-800 dark:text-white">
                       {totalItems} Items
                     </h2>{" "}
-                    {/* Display total item count */}
                   </div>
                   <div className="grid grid-cols-12 mt-8 max-md:hidden pb-6 border-b border-gray-200">
                     <div className="col-span-12 md:col-span-7">
@@ -292,8 +319,8 @@ const CartPage = () => {
                     </div>
                   ))}
                 </div>
-                <div className=" col-span-12 xl:col-span-4 bg-gray-50 dark:bg-gray-800 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:pl-8 py-24">
-                  <h2 className="font-manrope font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300 dark:text-white">
+                <div className=" col-span-12 xl:col-span-4 bg-gray-50 dark:bg-gray-800 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:pl-8 py-5 xl:py-24">
+                  <h2 className="font-manrope font-bold text-xl xl:text-3xl leading-10 text-black pb-8 border-b border-gray-300 dark:text-white">
                     Order Summary
                   </h2>
                   <div className="mt-8">
@@ -312,7 +339,7 @@ const CartPage = () => {
                       <div className="flex pb-1">
                         <div className="relative w-full">
                           <textarea
-                            className="px-3 py-2 w-full outline-none rounded-lg resize-none text-lg  text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="px-3 py-2 w-full outline-none rounded-lg resize-none text-lg  text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-gray-300"
                             rows="2"
                             placeholder="Enter your address here"
                             value={address}
@@ -327,7 +354,7 @@ const CartPage = () => {
                             placeholder="Enter Pincode"
                             value={pincode}
                             onChange={(e) => setPincode(e.target.value)}
-                            className="px-5 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="px-5 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-gray-300"
                           />
                         </div>
                       </div>

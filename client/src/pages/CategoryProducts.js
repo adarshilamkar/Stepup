@@ -41,14 +41,14 @@ const CategoryProducts = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold mb-6">
+    <div className="container mx-auto px-4 py-5 xl:py-10">
+      <h2 className="text:md xl:text-2xl font-bold mb-3 xl:mb-6 text-center">
         Products in Category {products[0]?.category?.name}
       </h2>
       {products.length === 0 ? (
         <div>No products found in this category.</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-4 xl:mx-0">
           {products.map((product) => (
             <Card
               key={product._id}

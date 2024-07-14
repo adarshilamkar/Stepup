@@ -5,10 +5,10 @@ import { Toaster } from "react-hot-toast";
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="overflow-hidden">
       <Header></Header>
       <Toaster></Toaster>
-      <div style={{minHeight:"85vh"}}>{children}</div>
+      <div style={{ minHeight: "85vh" }}>{children}</div>
       <Footer></Footer>
     </div>
   );

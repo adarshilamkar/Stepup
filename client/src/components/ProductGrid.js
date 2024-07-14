@@ -108,7 +108,7 @@ const ProductGrid = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      {/* {JSON.stringify(products)} */}
+      {/* Sort Dropdown */}
       <div className="flex justify-between items-center mb-4 lg:mb-6">
         <label
           htmlFor="sort"
@@ -129,9 +129,11 @@ const ProductGrid = () => {
           <option value="price-high">Price: High to Low</option>
         </select>
       </div>
+
+      {/* Filters and Product Grid */}
       <div className="flex flex-col lg:flex-row">
         {/* Filters */}
-        <div className="w-1/4 bg-blue-50 dark:bg-gray-800 rounded-lg p-6 shadow-md mb-6 mr-5">
+        <div className="w-full lg:w-1/4 bg-blue-50 dark:bg-gray-800 rounded-lg p-6 shadow-md mb-6 mr-5">
           <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
             Filters
           </h2>
@@ -177,9 +179,8 @@ const ProductGrid = () => {
         </div>
 
         {/* Product Cards */}
-        {/* {JSON.stringify(products)} */}
         <div className="w-full lg:w-3/4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6 justify-center mx-3 md:mx-0">
             {filteredProducts.map((product) => (
               <Card
                 key={product._id}

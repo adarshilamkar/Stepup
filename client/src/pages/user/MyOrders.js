@@ -6,53 +6,57 @@ import toast from "react-hot-toast";
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [auth] = useAuth();
+
   const cancelOrder = async (id) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/order/delete/${id}`
-    );
-    if (response.data.success) {
-      toast.success(response.data.message);
-      getOrders();
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/order/delete/${id}`
+      );
+      if (response.data.success) {
+        toast.success(response.data.message);
+        getOrders();
+      }
+    } catch (error) {
+      console.error("Error cancelling order:", error);
+      toast.error("Failed to cancel order");
     }
   };
-  //get orders data
+
   const getOrders = async () => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/order/myorders`,
-        { user: auth?.user?._id } // Sending user ID as "user" field
+        { user: auth?.user?._id }
       );
       if (response.data.success) {
         const ordersArray = Object.values(response.data.orders);
-        setOrders(ordersArray); // Set the converted array to state
-        // if (response.data.orders.length) toast.success(response.data.message);
+        setOrders(ordersArray);
       }
     } catch (error) {
-      // Handle errors
-      // console.error("Error fetching orders:", error);
-      // toast.error("Failed to fetch orders");
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 2000);
+      console.error("Error fetching orders:", error);
+      toast.error("Failed to fetch orders");
     }
   };
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     const options = { month: "long", day: "numeric", year: "numeric" };
     return date.toLocaleString("en-US", options);
   };
+
   useEffect(() => {
     getOrders();
   }, [auth]);
+
   return (
-    <div>
+    <div className="dark:bg-gray-900">
       {orders ? (
         <>
           {orders?.map((order) => (
             <section key={order._id} className="py-10 relative">
               <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
                 <div className="main-box border border-gray-200 dark:border-gray-800 rounded-xl pt-6 max-w-xl max-lg:mx-auto lg:max-w-full">
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between px-6 pb-6 border-b border-gray-200">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between px-6 pb-6 border-b border-gray-200 dark:border-gray-800">
                     <div className="data">
                       <p className="font-semibold text-base leading-7 text-gray-800 dark:text-white">
                         Order Id:{" "}
@@ -68,8 +72,8 @@ const MyOrders = () => {
                         </span>
                       </p>
                     </div>
-                    <p class=" py-3 px-7 font-semibold text-sm leading-7 max-lg:mt-5">
-                      <p className="font-semibold text-base leading-7 text-gray-800 dark:text-white mt-4">
+                    <p className="py-0 xl:py-3 px-0 xl:px-7 font-semibold text-sm leading-7 max-lg:mt-5">
+                      <p className="font-semibold text-base leading-7 text-gray-800 dark:text-white mt-0 xl:mt-4">
                         Shipping Address :{" "}
                         <span className="text-gray-400 font-medium">
                           {" "}
@@ -148,7 +152,7 @@ const MyOrders = () => {
                       </div>
                     </div>
                   ))}
-                  <div className="w-full border-t border-gray-200 px-6 flex flex-col lg:flex-row items-center justify-between ">
+                  <div className="w-full border-t border-gray-200 dark:border-gray-800 px-6 flex flex-col lg:flex-row items-center justify-between ">
                     <div className="flex flex-col sm:flex-row items-center max-lg:border-b border-gray-200 dark:border-gray-800">
                       {order.status === "Delivered" ? (
                         <button

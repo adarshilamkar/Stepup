@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const PromoCarousel = ({ featuredProducts }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false); // State to track loading status
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(false); // Reset loading state when products change
+    setIsLoaded(false);
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) =>
@@ -14,7 +14,6 @@ const PromoCarousel = ({ featuredProducts }) => {
       );
     }, 3000);
 
-    // Simulate product and image loading completion after 2 seconds
     setTimeout(() => {
       setIsLoaded(true);
     }, 2000);
@@ -38,58 +37,56 @@ const PromoCarousel = ({ featuredProducts }) => {
 
   return (
     <div className="w-full max-w-screen-xl mx-auto mt-4 mb-8 px-4 relative">
-      {/* Loader while products are not loaded */}
       {!isLoaded && (
-        <div className="flex items-center justify-center absolute inset-0 bg-gray-200 bg-opacity-75 z-10">
-          <p>Loading...</p>
+        <div className="flex items-center justify-center absolute inset-0 bg-gray-200 dark:bg-gray-800 bg-opacity-75 z-10">
+          <p className="text-black dark:text-white">Loading...</p>
         </div>
       )}
 
-      <div className="flex items-center justify-between">
-        <div className="w-2/3 relative overflow-hidden shadow-lg">
-          <div className="relative h-96">
-            {featuredProducts.map((product, index) => (
-              <Link to={`/product/${product._id}`} key={product._id}>
-                <div
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
-                  style={{
-                    transform: `translateX(${index - currentSlide}00%)`,
-                    opacity: index === currentSlide ? 1 : 0,
-                  }}
-                >
-                  <div className="h-96">
-                    <img
-                      src={`${process.env.REACT_APP_API}/api/v1/product//product-photo/${product._id}`}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                      onLoad={() => setIsLoaded(true)} // Update loading state when image is loaded
-                    />
+      <div className="relative overflow-hidden shadow-lg">
+        <div className="relative h-64 md:h-96">
+          {featuredProducts.map((product, index) => (
+            <Link to={`/product/${product._id}`} key={product._id}>
+              <div
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  index === currentSlide ? "opacity-100" : "opacity-0"
+                }`}
+                style={{
+                  transform: `translateX(${index - currentSlide}00%)`,
+                  opacity: index === currentSlide ? 1 : 0,
+                }}
+              >
+                <div className="relative h-64 md:h-96">
+                  <img
+                    src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                    onLoad={() => setIsLoaded(true)}
+                  />
+                  {/* Discount Line */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 dark:bg-opacity-75 p-4 text-white">
+                    <p className="text-xl md:text-3xl font-bold mb-2">
+                      FLAT {product.discount[0]}% OFF
+                    </p>
+                    {/* Show product details on larger screens */}
+                    <div className="hidden md:block">
+                      <h2 className="text-lg md:text-2xl font-semibold mb-2">
+                        {product.name}
+                      </h2>
+                      <p className="text-sm md:text-lg">
+                        {product.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-        <div className="w-1/3 bg-slate-200 text-gray-700 p-4 h-96 flex items-center justify-center flex-col ml-2">
-          <div className="w-full max-w-xl">
-            <p className="text-5xl font-bold mb-2">
-              FLAT {featuredProducts[currentSlide]?.discount[0]} % OFF
-            </p>
-            <h2 className="text-3xl font-semibold mb-2">
-              {featuredProducts[currentSlide]?.name}
-            </h2>
-            <p className="text-lg">
-              {featuredProducts[currentSlide]?.description}
-            </p>
-          </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
       <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex justify-between w-full px-4">
-        {/* Arrow icons for navigation */}
         <button
-          className="bg-black bg-opacity-50 text-white p-2 rounded-full"
+          className="bg-black dark:bg-gray-700 bg-opacity-20 text-white p-2 rounded-full"
           onClick={prevSlide}
         >
           <svg
@@ -108,7 +105,7 @@ const PromoCarousel = ({ featuredProducts }) => {
           </svg>
         </button>
         <button
-          className="bg-black bg-opacity-50 text-white p-2 mr-6 rounded-full"
+          className="bg-black dark:bg-gray-700 bg-opacity-20 text-white p-2 mr-6 rounded-full"
           onClick={nextSlide}
         >
           <svg
