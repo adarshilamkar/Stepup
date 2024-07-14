@@ -54,5 +54,7 @@ To deploy this project run:
 
 Ab jo man me aaye karo.
 
+[Aur project ka live link ye rha](https://stepupshoes.vercel.app/)
+
 Jai Shree Ram
 
