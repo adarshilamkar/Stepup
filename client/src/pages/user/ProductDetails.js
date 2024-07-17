@@ -111,7 +111,7 @@ const ProductDetails = () => {
             <div className="container mx-auto px-6 flex flex-col lg:flex-row relative py-16">
               <div className="lg:w-2/5 flex flex-col relative z-20 mb-8 lg:mb-0">
                 <h1 className="font-bebas-neue sm:text-2xl font-bold flex flex-col dark:text-white text-gray-800">
-                  {product.name ? <>{product.name}</> : <>Product</>}
+                  {product?.name ? <>{product.name}</> : <>Product</>}
                 </h1>
                 <p className="font-bebas-neue text-md xl:text-xl text-gray-700 dark:text-white">
                   {product ? product.info : "info"}
@@ -120,9 +120,9 @@ const ProductDetails = () => {
                   <span>
                     <span className="font-bold text-gray-800 dark:text-white">
                       ₹
-                      {product.price
-                        ? (product.price[productno] *
-                            (100 - product.discount[productno])) /
+                      {product?.price
+                        ? (product?.price[productno] *
+                            (100 - product?.discount[productno])) /
                           100
                         : 0}
                     </span>{" "}
