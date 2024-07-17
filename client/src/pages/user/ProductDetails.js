@@ -280,7 +280,7 @@ const ProductDetails = () => {
                             </div>
                             <div>
                               <p className="text-lg font-semibold">
-                                {review.user.name}
+                                {review?.user?.name}
                               </p>
                               <div className="text-yellow-400">
                                 {[...Array(review.rating)].map((_, index) => (
