@@ -43,8 +43,8 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log(process.env.REACT_APP_API);
     e.preventDefault();
+    setSubmit(false);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/auth/register`,
@@ -59,7 +59,6 @@ const Register = () => {
       );
       setOtpVis(true);
       toast.success(res.data.message);
-      setSubmit(false);
       // if (res.data.success === true) {
       //   toast.success(res.data.message);
       //   navigate("/login");
